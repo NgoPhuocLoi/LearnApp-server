@@ -14,6 +14,11 @@ const lessonSchema = new Schema({
     type: String,
     required: true,
   },
+  type: {
+    type: String,
+    enum: ["READING", "LISTENING"],
+  },
+
   createdAt: {
     type: Date,
     default: Date.now,

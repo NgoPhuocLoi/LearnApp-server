@@ -2,7 +2,7 @@ const Lesson = require("../modals/Lesson");
 
 const lessonController = {
   createLesson: async (req, res) => {
-    const { driveUrl, formUrl, title } = req.body;
+    const { driveUrl, formUrl, title, type } = req.body;
 
     if (!driveUrl || !formUrl || !title) {
       return res.status(400).json({
@@ -16,6 +16,7 @@ const lessonController = {
         title,
         driveUrl,
         formUrl,
+        type,
       });
       await newLesson.save();
       res.json({
@@ -61,7 +62,7 @@ const lessonController = {
     }
   },
   updateLesson: async (req, res) => {
-    const { title, driveUrl, formUrl } = req.body;
+    const { title, driveUrl, formUrl, type } = req.body;
     if (!title || !driveUrl || !formUrl)
       return res
         .status(400)
@@ -71,6 +72,7 @@ const lessonController = {
       title,
       driveUrl,
       formUrl,
+      type,
     };
 
     try {
