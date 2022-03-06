@@ -60,9 +60,10 @@ const authController = {
       return res
         .status(400)
         .json({ success: false, message: "Missing username or/and password!" });
-
+    console.log(1);
     try {
       const user = await User.findOne({ username });
+      console.log(2);
       // Check existing user
       if (!user)
         return res
@@ -70,7 +71,7 @@ const authController = {
           .json({ success: false, message: "Incorrect username or password!" });
 
       const passwordValidation = await argon2.verify(user.password, password);
-
+      console.log(3);
       if (!passwordValidation)
         return res
           .status(400)
