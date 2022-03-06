@@ -15,6 +15,9 @@ const UserSchema = new Schema({
     type: Boolean,
     default: false,
   },
+  doneLessons: {
+    type: Array,
+  },
   createdAt: {
     type: Date,
     default: Date.now,

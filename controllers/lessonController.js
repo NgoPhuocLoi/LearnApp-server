@@ -1,4 +1,5 @@
 const Lesson = require("../modals/Lesson");
+const User = require("../modals/User");
 
 const lessonController = {
   createLesson: async (req, res) => {
@@ -91,6 +92,51 @@ const lessonController = {
       res
         .status(500)
         .json({ success: false, message: "Internal Server Error" });
+    }
+  },
+
+  addDoneLesson: async (req, res) => {
+    const lessonId = req.params.id;
+    try {
+      const user = await User.findByIdAndUpdate(
+        req.userId,
+        {
+          $push: { doneLessons: lessonId },
+        },
+        { new: true }
+      );
+      res.json({
+        success: true,
+        message: "Well Done!!",
+        doneLessons: user.doneLessons,
+      });
+    } catch (error) {
+      console.log("error", error);
+      res
+        .status(500)
+        .json({ success: false, message: "Error at update done lessons" });
+    }
+  },
+  removeDoneLesson: async (req, res) => {
+    const lessonId = req.params.id;
+    try {
+      const user = await User.findByIdAndUpdate(
+        req.userId,
+        {
+          $pull: { doneLessons: lessonId },
+        },
+        { new: true }
+      );
+      res.json({
+        success: true,
+        message: "Well Done!!",
+        doneLessons: user.doneLessons,
+      });
+    } catch (error) {
+      console.log("error", error);
+      res
+        .status(500)
+        .json({ success: false, message: "Error at update done lessons" });
     }
   },
 };
