@@ -3,7 +3,7 @@ const User = require("../modals/User");
 
 const lessonController = {
   createLesson: async (req, res) => {
-    const { driveUrl, formUrl, title, type } = req.body;
+    const { driveUrl, formUrl, title, type, folder } = req.body;
 
     if (!driveUrl || !formUrl || !title) {
       return res.status(400).json({
@@ -18,6 +18,7 @@ const lessonController = {
         driveUrl,
         formUrl,
         type,
+        folder,
       });
       await newLesson.save();
       res.json({

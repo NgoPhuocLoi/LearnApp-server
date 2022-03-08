@@ -18,6 +18,10 @@ const lessonSchema = new Schema({
     type: String,
     enum: ["READING", "LISTENING"],
   },
+  folder: {
+    type: Schema.Types.ObjectId,
+    ref: "folders",
+  },
 
   createdAt: {
     type: Date,
