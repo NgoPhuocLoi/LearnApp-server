@@ -5,6 +5,7 @@ const dotenv = require("dotenv");
 const lessonRouter = require("./routes/lessons");
 const authRouter = require("./routes/auth");
 const folderRouter = require("./routes/folder");
+const userRouter = require("./routes/user");
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -22,6 +23,7 @@ app.use(express.json());
 app.use("/v1/lessons", lessonRouter);
 app.use("/v1/auth", authRouter);
 app.use("/v1/folder", folderRouter);
+app.use("/v1/user", userRouter);
 
 app.listen(PORT, () => {
   console.log("Server is running...");

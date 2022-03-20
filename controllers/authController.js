@@ -4,7 +4,7 @@ const jwt = require("jsonwebtoken");
 
 const authController = {
   registerUser: async (req, res) => {
-    const { username, password, passwordConfirm } = req.body;
+    const { username, password, passwordConfirm, displayName } = req.body;
 
     // Simple validation
     if (!username || !password)
@@ -29,7 +29,11 @@ const authController = {
 
       // newUser is valid
       const hashedPassword = await argon2.hash(password);
-      const newUser = new User({ username, password: hashedPassword });
+      const newUser = new User({
+        username,
+        password: hashedPassword,
+        displayName,
+      });
       await newUser.save();
 
       // return accessToken
@@ -91,6 +95,8 @@ const authController = {
           username: user.username,
           isAdmin: user.isAdmin,
           doneLessons: user.doneLessons,
+          displayName: user.displayName,
+          avatar: user.avatar,
         },
       });
     } catch (error) {
