@@ -1,11 +1,11 @@
 const express = require("express");
 const router = express.Router();
-const verifyToken = require("../middlewares/auth");
+const authMiddleware = require("../middlewares/auth");
 const userController = require("../controllers/userController");
 
 //@route PUT /v1/user/update
 //@desc Update user information
 //@access PRIVATE
-router.put("/update", verifyToken, userController.updateInfo);
+router.put("/update", authMiddleware.verifyToken, userController.updateInfo);
 
 module.exports = router;

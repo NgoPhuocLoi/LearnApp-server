@@ -82,7 +82,7 @@ const authController = {
       // return accessToken
 
       const accessToken = jwt.sign(
-        { userId: user._id },
+        { userId: user._id, isAdmin: user.isAdmin },
         process.env.ACCESS_TOKEN_SECRET
       );
 
